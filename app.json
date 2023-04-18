@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "AllergySense",
-    "slug": "AllergySense",
+    "slug": "allergysense",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "bfed999f-2212-4ebb-81f7-1cc7941c0e59"
+      }
+    },
+    "owner": "arjunbhat"
   }
 }
