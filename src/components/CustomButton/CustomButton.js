@@ -28,8 +28,14 @@ const styles = StyleSheet.create({
     },
     text_TERTIARY:{
         color:"grey",
-    }
-
+    },
+    container_SECONDARY:{
+        borderColor: "#6F2DBD",
+        borderWidth: 2,
+    },
+    text_SECONDARY:{
+      color: "#6F2DBD",
+    },
 })
 
 
