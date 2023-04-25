@@ -1,9 +1,10 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Alert } from "react-native";
 import React, { useState } from "react";
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import SocialSignInButtons from "../../components/SocialSignInButtons";
 import { useNavigation } from "@react-navigation/native";
+import { Auth } from "aws-amplify";
 
 const SignUpScreen = () => {
   const [username, setUsername] = useState("");
@@ -12,8 +13,20 @@ const SignUpScreen = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigation = useNavigation();
 
-  const onRegisterPressed = () => {
-    navigation.navigate("ConfirmEmail");
+  const onRegisterPressed = async () => {
+    try {
+      await Auth.signUp({
+        username,
+        password,
+        attributes: {
+          email, preferred_username: username
+        },
+      });
+      navigation.navigate("ConfirmEmail",{username});
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    }
+    // navigation.navigate("ConfirmEmail");
   };
 
   const onSignInPressed = () => {

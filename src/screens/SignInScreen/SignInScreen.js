@@ -5,6 +5,7 @@ import {
   StyleSheet,
   useWindowDimensions,
   ScrollView,
+  Alert
 } from "react-native";
 import React, { useState } from "react";
 import Logo from "../../images/AllergySenseLogo.png";
@@ -12,16 +13,28 @@ import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import SocialSignInButtons from "../../components/SocialSignInButtons";
 import { useNavigation } from "@react-navigation/native";
+import { Auth } from "aws-amplify";
+
 
 const SignInScreen = () => {
   const { height } = useWindowDimensions();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
+  const [loading, setLoading] = useState(false);
 
-  const onSignInPressed = () => {
-    // validate user
-    navigation.navigate("Home");
+  const onSignInPressed = async () => {
+    if(loading) return;
+    setLoading(true);
+    try{
+      const response = await Auth.signIn(username, password);
+      console.log(response);
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    }
+    setLoading(false);
+    // navigation.navigate("Home");
+
   };
   const onForgotPasswordPressed = () => {
     navigation.navigate("ForgotPassword");
@@ -51,7 +64,7 @@ const SignInScreen = () => {
           secureTextEntry
         />
 
-        <CustomButton text="Sign In" onPress={onSignInPressed} />
+        <CustomButton text={loading ? "Loading..." : "Sign In"} onPress={onSignInPressed} />
 
         <CustomButton
           text="Forgot Password?"

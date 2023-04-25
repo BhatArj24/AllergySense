@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-allergysense-staging-44358-authRole",
+      "UnauthRoleArn": "arn:aws:iam::301132508200:role/amplify-allergysense-staging-44358-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::301132508200:role/amplify-allergysense-staging-44358-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-allergysense-staging-44358-deployment",
+      "UnauthRoleName": "amplify-allergysense-staging-44358-unauthRole",
+      "StackName": "amplify-allergysense-staging-44358",
+      "StackId": "arn:aws:cloudformation:us-west-2:301132508200:stack/amplify-allergysense-staging-44358/4c0b3f80-e0c8-11ed-8448-0a976c341ab1",
+      "AmplifyAppId": "d1z4s0w1outnfo"
+    },
+    "categories": {
+      "auth": {
+        "AllergySense": {}
+      }
+    }
+  }
+}

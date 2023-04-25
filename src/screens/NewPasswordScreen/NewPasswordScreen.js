@@ -1,16 +1,23 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Alert } from "react-native";
 import React, { useState } from "react";
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import SocialSignInButtons from "../../components/SocialSignInButtons";
 import { useNavigation } from "@react-navigation/native";
+import { Auth } from "aws-amplify";
 
 const NewPasswordScreen = () => {
   const [code, setCode] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [username, setUsername] = useState("");
   const navigation = useNavigation();
-  const onSubmitPressed = () => {
-    navigation.navigate("SignIn");
+  const onSubmitPressed = async () => {
+    try {
+      await Auth.forgotPasswordSubmit(username, code, newPassword);
+      navigation.navigate("SignIn");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    }
   };
   const onSignInPressed = () => {
     navigation.navigate("SignIn");
@@ -21,6 +28,13 @@ const NewPasswordScreen = () => {
     <ScrollView>
       <View style={styles.root}>
         <Text style={styles.header}>Reset Password</Text>
+        
+        <CustomInput
+          placeholder={"Enter Username"}
+          value={username}
+          setValue={setUsername}
+        />
+        
         <CustomInput
           placeholder={"Enter Confirmation Code"}
           value={code}
@@ -31,6 +45,7 @@ const NewPasswordScreen = () => {
           placeholder={"Enter New Password"}
           value={newPassword}
           setValue={setNewPassword}
+          secureTextEntry
         />
 
         <CustomButton text="Submit" onPress={onSubmitPressed} />

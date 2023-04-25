@@ -1,16 +1,22 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Alert } from "react-native";
 import React, { useState } from "react";
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import SocialSignInButtons from "../../components/SocialSignInButtons";
 import { useNavigation } from "@react-navigation/native";
+import { Auth } from "aws-amplify";
 
 const ForgotPasswordScreen = () => {
 
   const [username, setUsername] = useState("");
   const navigation = useNavigation();
-  const onSendPressed = () => {
-    navigation.navigate("NewPassword");
+  const onSendPressed = async () => {
+    try {
+      await Auth.forgotPassword(username);
+      navigation.navigate('NewPassword')
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    }
   };
   const onSignInPressed = () => {
     navigation.navigate("SignIn");
