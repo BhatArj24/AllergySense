@@ -1,0 +1,13 @@
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  email: AWSEmail
+  username: String
+  Allergies: [Allergy] @hasMany(indexName: "byUser", fields: ["id"])
+}
+
+type Allergy @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  severity: String
+  userID: ID! @index(name: "byUser")
+}
