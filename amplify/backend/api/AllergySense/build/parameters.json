@@ -1,0 +1,7 @@
+{
+    "AppSyncApiName": "AllergySense",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "S3DeploymentBucket": "amplify-allergysense-staging-44358-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/457b1f6acf2b47def881b563decb7e03906b1c4a"
+}
