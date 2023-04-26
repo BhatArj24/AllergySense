@@ -14,7 +14,7 @@ const ConfirmEmailScreen = () => {
   const onConfirmPressed = async () => {
     try {
       await Auth.confirmSignUp(username, code);
-      navigation.navigate("Home");
+      navigation.navigate("SignIn");
     } catch (error) {
       Alert.alert("Error", error.message);
     }
